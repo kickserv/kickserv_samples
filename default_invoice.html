@@ -1,0 +1,300 @@
+<html>
+<head>
+  <title>Example Invoice Template</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+  <style type="text/css">
+  /* table */
+  table{border-collapse:collapse;}
+  th,td{padding:.1em .5em;}
+  th.label,
+  td.label{text-align:right;vertical-align:top;white-space:nowrap;}
+  tr.divider{border-top:1px solid #ccc;}
+  table.spacious th,
+  table.spacious td{padding:.1em .8em;}
+  /* account logo */
+  img.account-logo{padding:2px;background:#fff;border:1px solid #ddd;}
+  /* ---[ commmon ]------------------------------- */
+  h1,h2,h3,h4,h5,h6,div,span,a,p,hr,ul,li,dl,dt,dd,form,input,img,pre,code{margin:0;padding:0;}
+  h1,h2,h3{letter-spacing:-1px;padding-bottom:3px;}
+  h1{font-size:175%;}
+  h2{font-size:150%;}
+  h3{font-size:125%;color:#555;}
+  p{margin:.5em 0;}
+  ul{list-style:none;}
+  table{margin:10px 0;border-collapse:collapse;}
+  th,td{padding:.1em .3em;vertical-align:top;}
+  th{border-bottom:1px solid #ccc;}
+  label{font-weight:bold;color:#555;}
+  dt{margin:.5em 0 .3em 0;font-weight:bold;}
+  small{font-weight:bold;color:#555;}
+  /* ---[ table formatting ]------------------------------- */
+  td.numeric, td.currency, th.currency, td.date {text-align:right;}
+  /* templates */
+  .template_on_screen_options,
+  .template_on_screen{margin:20px auto 20px auto;padding:20px;width:750px;border:1px solid #ccc;}
+  .template_on_screen{font-family:Helvetica,Arial,sans-serif;}
+  .template_on_screen_options{text-align:center;padding:15px 20px;background:#ffc;}
+  .template_on_screen_options a{margin-right:20px;}
+  table{margin:0;padding:0;}
+  td.expand{width:100%;}
+  table#details{margin:20px 0;}
+  #primary_contact_details{margin-top:10px;}
+  .contact_details{padding-left:20px;}
+  table#customer_address,
+  table#vitals{margin-right:50px;}
+  table#customer_address{margin-left:20px;}
+  table#vitals{padding:.3em 1em;border:1px solid #dcdcdc;}
+  table#vitals td{text-align:right;padding:.3em 1em;border:1px solid #dcdcdc;}
+  table#vitals td.label{color:#333;background:#dcdcdc;}
+  table#charges{width:100%;margin-top:20px;}
+  table#charges th,
+  table#charges td{padding:.5em 2em .5em .5em;border-bottom:1px solid #dcdcdc;}
+  table#charges th.last,
+  table#charges td.last{padding-right:.5em;}
+  table#charges th{background:#dcdcdc;}
+  table#totals{text-align:right;margin:20px 0 30px 0;}
+  table#totals td{padding-left:3em;}
+  #terms,
+  #notes{margin:10px 0 5px 0;}
+  .show_inline_edit_on_hover a.inline_edit_link,
+  .show_inline_edit_on_hover form{display:none;}
+  table#custom_fields{margin:0 50px;}
+  #special_instructions{margin-top:10px;}
+  #job_name{color:#000;margin:0 20px;padding:10px 20px;border:1px solid #555;}
+  .section{margin:10px 20px;}
+  pre{font-family:Helvetica,Arial,sans-serif;}
+
+  /* The @page is a special style for the HTML to PDF software (princexml) */
+  @page{margin:72px 5px;}
+
+  body{background:#fff;margin:20px 50px 20px 50px;color:#000;font:12px Helvetica,sans-serif;}
+
+  .template_on_screen_options,.template_on_screen{border:none;margin:0px;padding:0px;width:100%;}
+
+
+  </style>
+
+
+</head>
+<body>
+  <div class="template_on_screen invoice">
+
+    <table id="template_header">
+      <tr>
+        <td class="expand">
+          <h1>INVOICE</h1>
+        </td>
+        <td>
+          {{ account.logo }}
+        </td>
+      </tr>
+    </table>
+
+    <table id="details">
+      <tr>
+        <td width="33%">
+          <!-- customer -->
+          <table id="customer_address">
+            <tr>
+              <td nowrap="nowrap">
+                {{ customer.name }}
+              </td>
+            </tr>
+            <tr>
+              <td nowrap="nowrap">
+                {{ customer.billing_address }}
+              </td>
+            </tr>
+            <tr>
+              <td nowrap="nowrap">
+                {{ customer.billing_city }}, {{ customer.billing_state }} {{ customer.billing_zip_code }}
+              </td>
+            </tr>
+            <tr>
+              <td nowrap="nowrap">
+                {{ customer.billing_country }}
+              </td>
+            </tr>
+            {% if customer.email_address %}
+            <tr>
+              <td nowrap="nowrap">
+                {{ customer.email_address }}
+              </td>
+            </tr>
+            {% endif %}
+            {% if customer.phone_number %}
+            <tr>
+              <td nowrap="nowrap">
+                {{ customer.phone_number }}
+              </td>
+            </tr>
+            {% endif %}
+            {% if customer.alt_phone_number %}
+            <tr>
+              <td nowrap="nowrap">
+                {{ customer.alt_phone_number }}
+              </td>
+            </tr>
+            {% endif %}
+            {% if customer.primary_contact && customer.primary_contact.name != customer.name %}
+            <tr>
+              <td>
+                <div id="primary_contact_details">
+                  Primary Contact:
+                  {{ customer.primary_contact.name }}
+                  {{ customer.primary_contact.phone1 }}
+                </div>
+              </td>
+            </tr>
+            {% endif %}
+          </table>
+        </td>
+        <td width="33%">
+          <table id="vitals">
+            <tr>
+              <td class="label" nowrap="nowrap"><strong>Invoice</strong></td>
+              <td> {{ job.job_number }}</td>
+            </tr>
+            <tr>
+              <td class="label"><strong>Date</strong></td>
+              {% if job.scheduled_on %}
+              <td nowrap="nowrap">{{ job.scheduled_on | date: "%m/%d/%y" }}</td>
+              {% endif %}
+            </tr>
+            <tr>
+              <td class="label"><strong>Total</strong></td>
+              <td>
+                {{ job.total | currency }}
+              </td>
+            </tr>
+            <tr>
+              <td class="label"><strong>Payments</strong></td>
+              <td>
+                {{ job.total_applied_payments | currency }}
+              </td>
+            </tr>
+            <tr>
+              <td class="label"><strong>Balance Remaining</strong></td>
+              <td>
+                {{ job.balance | currency }}
+              </td>
+            </tr>
+
+          </table>
+        </td>
+        <td width="33%" class="expand">
+          <table id="company_address" align="right">
+            <tr>
+              <td nowrap="nowrap">
+                {{ account.company_name }}
+              </td>
+            </tr>
+            <tr>
+              <td nowrap="nowrap">
+                {{ account.account_details.billing_address }}
+              </td>
+            </tr>
+            <tr>
+              <td nowrap="nowrap">
+                {{ account.account_details.billing_city }}, {{ account.account_details.billing_state  }}  {{ account.account_details.billing_zip_code }}
+              </td>
+            </tr>
+            <tr>
+              <td nowrap="nowrap">
+                {{ account.account_details.billing_country }}
+              </td>
+            </tr>
+            <tr>
+              <td nowrap="nowrap">
+                {{ account.account_details.billing_phone_number }}
+              </td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+    </table>
+
+    <table id="charges">
+      <tr>
+        <th style="text-align: left;">Item</th>
+        <th style="text-align: left;">Description</th>
+        <th class="currency" nowrap="nowrap">Unit Cost</th>
+        <th class="currency">Quantity</th>
+        <th nowrap="nowrap" class="currency last">Line Total</th>
+      </tr>
+      {% for charge in job.job_charges %}
+      <tr>
+        <td>
+          {% if charge.item %}
+          {{ charge.item.name }}
+          {% endif %}
+        </td>
+        <td>
+          {% if charge.details %}
+          {{ charge.details | h}}
+          {% elsif charge.description %}
+          {{ charge.description | h }}
+          {% endif %}
+        </td>
+        <td class="currency">
+          {{ charge.price_per_unit | currency }}
+        </td>
+        <td class="currency">{{ charge.quantity }}</td>
+        <td class="currency last">
+          {{ charge.total | currency }}
+        </td>
+      </tr>
+      {% endfor %}
+    </table>
+
+    <table id="totals">
+      <tr>
+        <td class="expand">Subtotal</td>
+        <td class="currency">{{ job.subtotal | currency }}</td>
+      </tr>
+      <tr>
+        <td>Tax</td>
+        <td class="currency">{{ job.tax | currency }}</td>
+      </tr>
+      <tr>
+        <td><strong>Total</strong>:</td>
+        <td class="currency"><strong>{{job.total | currency }}</strong></td>				
+      </tr>
+      {% if job.synced? %}
+      <tr>
+        <td>Total payments</td>
+        <td class="currency">{{ job.total_applied_payments | currency }}</td>
+      </tr>
+      <tr>
+        <td nowrap="nowrap">Balance remaining</td>
+        <td class="currency">{{ job.balance | currency }}</td>
+      </tr>
+      {% endif %}
+    </table>
+
+
+    {% if job.invoice_terms != empty %}
+    <div id="terms">
+      <div>
+        <strong>Terms</strong>
+      </div>
+      <div class="setting">
+        {{ job.invoice_terms | h }}
+      </div>
+    </div>
+    {% endif %}
+
+    {% if job.invoice_notes != empty %}
+    <div id="notes">
+      <div>
+        <strong>Notes</strong>
+      </div>
+      <div class="setting">
+        {{ job.invoice_notes | h }}
+      </div>
+    </div>
+    {% endif %}
+  </div>
+</body>
+</html>
