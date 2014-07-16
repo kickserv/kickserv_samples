@@ -180,7 +180,7 @@ Please reference the Bootstrap documentation for best practices.
           </tr>
         </tfoot>
         <tbody>
-          {% for charge in job.job_charges %}
+          {% for charge in job.job_charges %} <!-- Loop through each job charge -->
             <tr>
               <td>
                 {% if charge.item %}
