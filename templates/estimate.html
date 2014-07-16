@@ -174,14 +174,6 @@ Please reference the Bootstrap documentation for best practices.
               <strong>{{ job.total | currency }}</strong>
             </td>
           </tr>
-          <tr>
-            <td colspan=4 class="text-right">Payments</td>
-            <td class="text-right">{{ job.total_applied_payments | currency }}</td>
-          </tr>
-          <tr>
-            <td colspan=4 class="text-right">Balance Remaining</td>
-            <td class="text-right">{{ job.balance | currency }}</td>
-          </tr>
         </tfoot>
         <tbody>
           {% for charge in job.job_charges %} <!-- Loop through each job charge -->
