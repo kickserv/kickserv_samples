@@ -4,7 +4,7 @@ Kickserv Samples
 In this repository, you'll find example files and code to be used alongside the
 [Kickserv](http://www.kickserv.com) application.
 
-Some exmaple files include:
+Some example files include:
 
 * Custom templates
   * Invoices
