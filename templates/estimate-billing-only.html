@@ -5,11 +5,14 @@ Please reference the Bootstrap documentation for best practices.
 
 <html>
   <head>
-    <title>Work Order</title>
+    <title>Estimate</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 
     <style>
       /* Add any custom styles here, for example: */
+      body {
+        font-size: 14px; /* Adjust this value to make the font size bigger or smaller */
+      }
       header {
         margin-bottom: 40px;
       }
@@ -19,8 +22,15 @@ Please reference the Bootstrap documentation for best practices.
       #document-info {
         margin-bottom: 40px;
       }
-      #schedule-table, #charge-table {
+      #charge-table {
         margin-bottom: 40px;
+      }
+      .document-terms {
+        margin-bottom: 20px;
+      }
+      .signature-line {
+        border-top: 2px solid #000;
+        margin: 60px 0 5px;
       }
     </style>
 
@@ -31,14 +41,10 @@ Please reference the Bootstrap documentation for best practices.
 
       <header>
         <div class="row">
-          <div class="col-xs-8">
-            <h1>
-              {{ job.name }}
-              <small>Job #{{ job.job_number }}</small>
-            </h1>
-            <p>{{ job.description }}
+          <div class="col-xs-6">
+            <h1>Estimate #{{job.job_number}}</h1>
           </div>
-          <div class="col-xs-4 text-right">
+          <div class="col-xs-6 text-right">
             {{ account.logo }}
           </div>
         </div><!-- .row -->
@@ -51,9 +57,7 @@ Please reference the Bootstrap documentation for best practices.
             <br>
             {{ customer.billing_address }}
             <br>
-            {{ customer.billing_city }},
-            {{ customer.billing_state }}
-            {{ customer.billing_zip_code }}
+            {{ customer.billing_city }}, {{ customer.billing_state }} {{ customer.billing_zip_code }}
             <br>
             {{ customer.billing_country }}
           </address>
@@ -85,9 +89,7 @@ Please reference the Bootstrap documentation for best practices.
             <br>
             {{ account.account_details.billing_address }}
             <br>
-            {{ account.account_details.billing_city }},
-            {{ account.account_details.billing_state }}
-            {{ account.account_details.billing_zip_code }}
+            {{ account.account_details.billing_city }}, {{ account.account_details.billing_state }} {{ account.account_details.billing_zip_code }}
             <br>
             {{ account.account_details.billing_country }}
           </address>
@@ -147,30 +149,6 @@ Please reference the Bootstrap documentation for best practices.
         </div><!-- .col-xs-4 -->
       </div><!-- .row -->
 
-      <h2>Schedule</h2>
-      <table class="table" id="schedule-table">
-        <thead>
-          <tr>
-            <th>Date</th>
-            <th>Type</th>
-            <th>Notes</th>
-          </tr>
-        </thead>
-        <tbody>
-          {% for task in job.tasks %}
-            <tr>
-              <td>
-                <!-- Dates can be formatted with Ruby date syntax -->
-                {{ task.scheduled_at  | date: "%m/%d/%y %l:%M %p" }} -
-                {{ task.ends_at  | date: "%m/%d/%y %l:%M %p" }}
-              </td>
-              <td>{{ task.task_type.name }}</td>
-              <td>{{ task.name }}</td>
-            </tr>
-          {% endfor %}
-        </tbody>
-      </table>
-
       <h2>Charges</h2>
       <table class="table table-bordered" id="charge-table">
         <thead>
@@ -227,9 +205,35 @@ Please reference the Bootstrap documentation for best practices.
         </tbody>
       </table>
 
-      {% if account.account_details.work_order_footer != empty %}
-        <pre>{{ account.account_details.work_order_footer }}</pre>
+      {% if job.estimate_terms != empty %}
+        <div id="terms">
+          <h3>Terms</h3>
+          <div class="document-terms">
+            {{ job.estimate_terms | h }}
+          </div>
+        </div>
       {% endif %}
+
+      {% if job.estimate_notes != empty %}
+        <div id="notes">
+          <h3>Notes</h3>
+          <div class="document-notes">
+            {{ job.estimate_notes | h }}
+          </div>
+        </div>
+      {% endif %}
+
+      <!-- At the bottom of the estimate, you could add a signature area, like so: -->
+
+      <hr class="signature-line">
+      <div class="row">
+        <div class="col-xs-10">
+          Customer Signature
+        </div>
+        <div class="col-xs-2 text-left">
+          Date
+        </div>
+      </div><!-- .row -->
 
     </div><!-- .container -->
   </body>

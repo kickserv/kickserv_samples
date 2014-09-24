@@ -1,0 +1,239 @@
+<!--
+We use Bootstrap (http://getbootstrap.com) for our base layout and styles.
+Please reference the Bootstrap documentation for best practices.
+-->
+
+<html>
+  <head>
+    <title>Work Order</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+    <style>
+      /* Add any custom styles here, for example: */
+      body {
+        font-size: 14px; /* Adjust this value to make the font size bigger or smaller */
+      }
+      header {
+        margin-bottom: 40px;
+      }
+      header img {
+        max-height: 120px;
+      }
+      #document-info {
+        margin-bottom: 40px;
+      }
+      #schedule-table, #charge-table {
+        margin-bottom: 40px;
+      }
+    </style>
+
+  </head>
+
+  <body>
+    <div class="container">
+
+      <header>
+        <div class="row">
+          <div class="col-xs-8">
+            <h1>
+              {{ job.name }}
+              <small>Job #{{ job.job_number }}</small>
+            </h1>
+            <p>{{ job.description }}
+          </div>
+          <div class="col-xs-4 text-right">
+            {{ account.logo }}
+          </div>
+        </div><!-- .row -->
+      </header>
+
+      <div class="row" id="document-info">
+        <div class="col-xs-4">
+          <address>
+            <strong>{{ customer.name }}</strong>
+            <br>
+            {{ customer.service_address }}
+            <br>
+            {{ customer.service_city }},
+            {{ customer.service_state }}
+            {{ customer.service_zip_code }}
+            <br>
+            {{ customer.service_country }}
+          </address>
+
+          {% if customer.email_address %}
+            <div>{{ customer.email_address }}</div>
+          {% endif %}
+
+          {% if customer.phone_number %}
+            <div>{{ customer.phone_number }}</div>
+          {% endif %}
+
+          {% if customer.alt_phone_number %}
+            <div>{{ customer.alt_phone_number }}</div>
+          {% endif %}
+
+          {% if customer.primary_contact && customer.primary_contact.name != customer.name %}
+            <div id="primary_contact_details">
+              <strong>Primary Contact:</strong>
+              <div>{{ customer.primary_contact.name }}</div>
+              <div>{{ customer.primary_contact.phone1 }}</div>
+            </div>
+          {% endif %}
+        </div><!-- .col-xs-4 -->
+
+        <div class="col-xs-4">
+          <address>
+            <strong>{{ account.company_name }}</strong>
+            <br>
+            {{ account.account_details.billing_address }}
+            <br>
+            {{ account.account_details.billing_city }},
+            {{ account.account_details.billing_state }}
+            {{ account.account_details.billing_zip_code }}
+            <br>
+            {{ account.account_details.billing_country }}
+          </address>
+
+          {% if account.account_details.billing_phone_number %}
+            <div>{{ account.account_details.billing_phone_number }}</div>
+          {% endif %}
+        </div><!-- .col-xs-4 -->
+
+        <div class="col-xs-4">
+          <table class="table">
+            <tbody>
+              <tr>
+                <td>
+                  <strong>Estimate</strong>
+                </td>
+                <td class="text-right">
+                  {{ job.job_number }}
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <strong>Date</strong>
+                </td>
+                <td class="text-right">
+                  {% if job.scheduled_on %}
+                    {{ job.scheduled_on | date: "%m/%d/%y" }}
+                  {% endif %}
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <strong>Total</strong>
+                </td>
+                <td class="text-right">
+                  {{ job.total | currency }}
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <strong>Payments</strong>
+                </td>
+                <td class="text-right">
+                  {{ job.total_applied_payments | currency }}
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <strong>Balance Remaining</strong>
+                </td>
+                <td class="text-right">
+                  {{ job.balance | currency }}
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div><!-- .col-xs-4 -->
+      </div><!-- .row -->
+
+      <h2>Schedule</h2>
+      <table class="table" id="schedule-table">
+        <thead>
+          <tr>
+            <th>Date</th>
+            <th>Type</th>
+            <th>Notes</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for task in job.tasks %}
+            <tr>
+              <td>
+                <!-- Dates can be formatted with Ruby date syntax -->
+                {{ task.scheduled_at  | date: "%m/%d/%y %l:%M %p" }} -
+                {{ task.ends_at  | date: "%m/%d/%y %l:%M %p" }}
+              </td>
+              <td>{{ task.task_type.name }}</td>
+              <td>{{ task.name }}</td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+
+      <h2>Charges</h2>
+      <table class="table table-bordered" id="charge-table">
+        <thead>
+          <tr>
+            <th class="text-left">Item</th>
+            <th class="text-left">Description</th>
+            <th class="text-right">Price</th>
+            <th class="text-right">Quantity</th>
+            <th class="text-right">Total</th>
+          </tr>
+        </thead>
+        <tfoot>
+          <tr>
+            <td colspan=4 class="text-right">Subtotal</td>
+            <td class="text-right">{{ job.subtotal | currency }}</td>
+          </tr>
+          <tr>
+            <td colspan=4 class="text-right">Tax</td>
+            <td class="text-right">{{ job.tax | currency }}</td>
+          </tr>
+          <tr>
+            <td colspan=4 class="text-right">
+              <strong>Total</strong>
+            </td>
+            <td class="text-right">
+              <strong>{{ job.total | currency }}</strong>
+            </td>
+          </tr>
+        </tfoot>
+        <tbody>
+          {% for charge in job.job_charges %} <!-- Loop through each job charge -->
+            <tr>
+              <td>
+                {% if charge.item %}
+                  {{ charge.item.name }}
+                {% endif %}
+              </td>
+              <td>
+                {% if charge.details %}
+                  {{ charge.details | h}}
+                {% elsif charge.description %}
+                  {{ charge.description | h }}
+                {% endif %}
+              </td>
+              <td class="text-right">
+                {{ charge.price_per_unit | currency }}
+              </td>
+              <td class="text-right">{{ charge.quantity }}</td>
+              <td class="text-right">
+                {{ charge.total | currency }}
+              </td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+
+      {% if account.account_details.work_order_footer != empty %}
+        <pre>{{ account.account_details.work_order_footer }}</pre>
+      {% endif %}
+
+    </div><!-- .container -->
+  </body>
+</html>

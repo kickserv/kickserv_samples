@@ -10,6 +10,9 @@ Please reference the Bootstrap documentation for best practices.
 
     <style>
       /* Add any custom styles here, for example: */
+      body {
+        font-size: 14px; /* Adjust this value to make the font size bigger or smaller */
+      }
       header {
         margin-bottom: 40px;
       }
@@ -48,7 +51,39 @@ Please reference the Bootstrap documentation for best practices.
       </header>
 
       <div class="row" id="document-info">
-        <div class="col-xs-4">
+        <div class="col-xs-3">
+          <address>
+            <strong>{{ customer.name }}</strong>
+            <br>
+            {{ customer.service_address }}
+            <br>
+            {{ customer.service_city }}, {{ customer.service_state }} {{ customer.service_zip_code }}
+            <br>
+            {{ customer.service_country }}
+          </address>
+
+          {% if customer.email_address %}
+            <div>{{ customer.email_address }}</div>
+          {% endif %}
+
+          {% if customer.phone_number %}
+            <div>{{ customer.phone_number }}</div>
+          {% endif %}
+
+          {% if customer.alt_phone_number %}
+            <div>{{ customer.alt_phone_number }}</div>
+          {% endif %}
+
+          {% if customer.primary_contact && customer.primary_contact.name != customer.name %}
+            <div id="primary_contact_details">
+              <strong>Primary Contact:</strong>
+              <div>{{ customer.primary_contact.name }}</div>
+              <div>{{ customer.primary_contact.phone1 }}</div>
+            </div>
+          {% endif %}
+        </div><!-- .col-xs-3 -->
+
+        <div class="col-xs-3">
           <address>
             <strong>{{ customer.name }}</strong>
             <br>
@@ -78,9 +113,9 @@ Please reference the Bootstrap documentation for best practices.
               <div>{{ customer.primary_contact.phone1 }}</div>
             </div>
           {% endif %}
-        </div><!-- .col-xs-4 -->
+        </div><!-- .col-xs-3 -->
 
-        <div class="col-xs-4">
+        <div class="col-xs-3">
           <address>
             <strong>{{ account.company_name }}</strong>
             <br>
@@ -94,9 +129,9 @@ Please reference the Bootstrap documentation for best practices.
           {% if account.account_details.billing_phone_number %}
             <div>{{ account.account_details.billing_phone_number }}</div>
           {% endif %}
-        </div><!-- .col-xs-4 -->
+        </div><!-- .col-xs-3 -->
 
-        <div class="col-xs-4">
+        <div class="col-xs-3">
           <table class="table">
             <tbody>
               <tr>
@@ -143,7 +178,7 @@ Please reference the Bootstrap documentation for best practices.
               </tr>
             </tbody>
           </table>
-        </div><!-- .col-xs-4 -->
+        </div><!-- .col-xs-3 -->
       </div><!-- .row -->
 
       <h2>Charges</h2>

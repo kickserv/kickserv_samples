@@ -5,11 +5,14 @@ Please reference the Bootstrap documentation for best practices.
 
 <html>
   <head>
-    <title>Invoice</title>
+    <title>Estimate</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 
     <style>
       /* Add any custom styles here, for example: */
+      body {
+        font-size: 14px; /* Adjust this value to make the font size bigger or smaller */
+      }
       header {
         margin-bottom: 40px;
       }
@@ -25,6 +28,10 @@ Please reference the Bootstrap documentation for best practices.
       .document-terms {
         margin-bottom: 20px;
       }
+      .signature-line {
+        border-top: 2px solid #000;
+        margin: 60px 0 5px;
+      }
     </style>
 
   </head>
@@ -35,7 +42,7 @@ Please reference the Bootstrap documentation for best practices.
       <header>
         <div class="row">
           <div class="col-xs-6">
-            <h1>Invoice #{{job.job_number}}</h1>
+            <h1>Estimate #{{job.job_number}}</h1>
           </div>
           <div class="col-xs-6 text-right">
             {{ account.logo }}
@@ -48,11 +55,11 @@ Please reference the Bootstrap documentation for best practices.
           <address>
             <strong>{{ customer.name }}</strong>
             <br>
-            {{ customer.billing_address }}
+            {{ customer.service_address }}
             <br>
-            {{ customer.billing_city }}, {{ customer.billing_state }} {{ customer.billing_zip_code }}
+            {{ customer.service_city }}, {{ customer.service_state }} {{ customer.service_zip_code }}
             <br>
-            {{ customer.billing_country }}
+            {{ customer.service_country }}
           </address>
 
           {% if customer.email_address %}
@@ -97,7 +104,7 @@ Please reference the Bootstrap documentation for best practices.
             <tbody>
               <tr>
                 <td>
-                  <strong>Invoice</strong>
+                  <strong>Estimate</strong>
                 </td>
                 <td class="text-right">
                   {{ job.job_number }}
@@ -170,14 +177,6 @@ Please reference the Bootstrap documentation for best practices.
               <strong>{{ job.total | currency }}</strong>
             </td>
           </tr>
-          <tr>
-            <td colspan=4 class="text-right">Payments</td>
-            <td class="text-right">{{ job.total_applied_payments | currency }}</td>
-          </tr>
-          <tr>
-            <td colspan=4 class="text-right">Balance Remaining</td>
-            <td class="text-right">{{ job.balance | currency }}</td>
-          </tr>
         </tfoot>
         <tbody>
           {% for charge in job.job_charges %} <!-- Loop through each job charge -->
@@ -206,23 +205,35 @@ Please reference the Bootstrap documentation for best practices.
         </tbody>
       </table>
 
-      {% if job.invoice_terms != empty %}
+      {% if job.estimate_terms != empty %}
         <div id="terms">
           <h3>Terms</h3>
           <div class="document-terms">
-            {{ job.invoice_terms | h }}
+            {{ job.estimate_terms | h }}
           </div>
         </div>
       {% endif %}
 
-      {% if job.invoice_notes != empty %}
+      {% if job.estimate_notes != empty %}
         <div id="notes">
           <h3>Notes</h3>
           <div class="document-notes">
-            {{ job.invoice_notes | h }}
+            {{ job.estimate_notes | h }}
           </div>
         </div>
       {% endif %}
+
+      <!-- At the bottom of the estimate, you could add a signature area, like so: -->
+
+      <hr class="signature-line">
+      <div class="row">
+        <div class="col-xs-10">
+          Customer Signature
+        </div>
+        <div class="col-xs-2 text-left">
+          Date
+        </div>
+      </div><!-- .row -->
 
     </div><!-- .container -->
   </body>
