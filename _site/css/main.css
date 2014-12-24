@@ -352,6 +352,41 @@ html * {
       .post-content .swatch-card .swatch.red {
         background: #EA090C; }
 
+.specimen {
+  background: #fff;
+  border: 1px solid #e8e8e8;
+  border-radius: 3px;
+  margin-bottom: 30px;
+  padding: 15px; }
+  .specimen .fontitem {
+    margin-bottom: 15px; }
+  .specimen .identifier {
+    color: #828282;
+    display: block;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 12px;
+    font-weight: 400; }
+  .specimen .stylesample {
+    font-size: 18px; }
+  .specimen .paragraph {
+    margin-bottom: 0; }
+  .specimen.ubuntu {
+    font-family: 'Ubuntu', sans-serif; }
+  .specimen.opensans {
+    font-family: 'Open Sans', sans-serif; }
+  .specimen .normal-300 {
+    font-weight: 300; }
+  .specimen .normal-400 {
+    font-weight: 400; }
+  .specimen .normal-500 {
+    font-weight: 500; }
+  .specimen .normal-600 {
+    font-weight: 600; }
+  .specimen .normal-700 {
+    font-weight: 700; }
+  .specimen .normal-800 {
+    font-weight: 800; }
+
 /**
  * Syntax highlighting styles
  */

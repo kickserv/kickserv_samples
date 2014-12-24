@@ -252,7 +252,7 @@
 
     img {
       border: 1px solid $grey-color-light;
-      border-radius: 3px;
+      border-radius: $border-radius;
       background: #fff;
       margin-bottom: $spacing-unit / 4;
       margin-right: 4px;
@@ -271,7 +271,7 @@
     .swatch-card {
       background: #fff;
       border: 1px solid $grey-color-light;
-      border-radius: 3px;
+      border-radius: $border-radius;
       display: inline-block;
       margin-right: 6px;
       padding: 6px;
@@ -288,4 +288,52 @@
         }
       }
     }
+}
+
+.specimen {
+  background: #fff;
+  border: 1px solid $grey-color-light;
+  border-radius: $border-radius;
+  margin-bottom: $spacing-unit;
+  padding: $spacing-unit / 2;
+  .fontitem {
+    margin-bottom: $spacing-unit / 2;
+  }
+  .identifier {
+    color: $grey-color;
+    display: block;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 12px;
+    font-weight: 400;
+  }
+  .stylesample {
+    font-size: 18px;
+  }
+  .paragraph {
+    margin-bottom: 0;
+  }
+  &.ubuntu {
+    font-family: 'Ubuntu', sans-serif;
+  }
+  &.opensans {
+    font-family: 'Open Sans', sans-serif;
+  }
+  .normal-300 {
+    font-weight: 300;
+  }
+  .normal-400 {
+    font-weight: 400;
+  }
+  .normal-500 {
+    font-weight: 500;
+  }
+  .normal-600 {
+    font-weight: 600;
+  }
+  .normal-700 {
+    font-weight: 700;
+  }
+  .normal-800 {
+    font-weight: 800;
+  }
 }
