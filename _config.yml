@@ -1,9 +1,9 @@
 # Site settings
 title: Kickserv Style Guide
 email: info@kickserv.com
-description: Style guide and branding resources for Kickserv. 
-baseurl: "/kickserv_samples" # the subpath of your site, e.g. /blog/
-url: "http://kickserv.com" # the base hostname & protocol for your site
+description: Style guide and branding resources for Kickserv.
+baseurl: "" # the subpath of your site, e.g. /blog/
+url: "http://style.kickserv.com" # the base hostname & protocol for your site
 twitter_username: kickserv
 github_username:  kickserv
 
