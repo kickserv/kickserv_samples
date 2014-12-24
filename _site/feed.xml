@@ -3,10 +3,10 @@
   <channel>
     <title>Kickserv Style Guide</title>
     <description>Style guide and branding resources for Kickserv.</description>
-    <link>http://kickserv.com/</link>
-    <atom:link href="http://kickserv.com/feed.xml" rel="self" type="application/rss+xml" />
-    <pubDate>Wed, 24 Dec 2014 06:48:03 -0600</pubDate>
-    <lastBuildDate>Wed, 24 Dec 2014 06:48:03 -0600</lastBuildDate>
+    <link>http://style.kickserv.com/</link>
+    <atom:link href="http://style.kickserv.com/feed.xml" rel="self" type="application/rss+xml" />
+    <pubDate>Wed, 24 Dec 2014 07:10:18 -0600</pubDate>
+    <lastBuildDate>Wed, 24 Dec 2014 07:10:18 -0600</lastBuildDate>
     <generator>Jekyll v2.4.0</generator>
     
       <item>
@@ -27,8 +27,8 @@
 
 </description>
         <pubDate>Tue, 23 Dec 2014 13:19:50 -0600</pubDate>
-        <link>http://kickserv.com/jekyll/update/2014/12/23/welcome-to-jekyll.html</link>
-        <guid isPermaLink="true">http://kickserv.com/jekyll/update/2014/12/23/welcome-to-jekyll.html</guid>
+        <link>http://style.kickserv.com/jekyll/update/2014/12/23/welcome-to-jekyll.html</link>
+        <guid isPermaLink="true">http://style.kickserv.com/jekyll/update/2014/12/23/welcome-to-jekyll.html</guid>
         
         
         <category>jekyll</category>

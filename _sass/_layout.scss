@@ -262,6 +262,10 @@
       &.reverse {
         background: #000;
       }
+
+      &.w150 {
+        max-width: 192px;
+      }
     }
 
     .swatch-card {

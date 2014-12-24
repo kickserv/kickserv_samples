@@ -333,6 +333,8 @@ html * {
     padding: 20px; }
     .post-content img.reverse {
       background: #000; }
+    .post-content img.w150 {
+      max-width: 192px; }
   .post-content .swatch-card {
     background: #fff;
     border: 1px solid #e8e8e8;
