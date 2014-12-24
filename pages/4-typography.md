@@ -11,7 +11,8 @@ screen applications and should be used whenever possible.
 
 **Download**
 
-It is freely available on [Google Fonts](http://www.google.com/fonts/specimen/Open%20Sans).
+Open Sans is freely available on
+[Google Fonts](http://www.google.com/fonts/specimen/Open%20Sans).
 
 **Sample**
 
