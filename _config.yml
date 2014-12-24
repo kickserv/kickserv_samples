@@ -1,0 +1,13 @@
+# Site settings
+title: Kickserv Style Guide
+email: info@kickserv.com
+description: > # this means to ignore newlines until "baseurl:"
+  Style guide for Kickserv. Includes design styles, branding resources,
+  press kits, etc.
+baseurl: "" # the subpath of your site, e.g. /blog/
+url: "http://kickserv.com" # the base hostname & protocol for your site
+twitter_username: kickserv
+github_username:  kickserv
+
+# Build settings
+markdown: kramdown
