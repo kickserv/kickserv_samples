@@ -24,7 +24,7 @@ Please reference the Bootstrap documentation for best practices.
       #schedule-table, #charge-table {
         margin-bottom: 40px;
       }
-	  
+
     </style>
 
   </head>
@@ -43,7 +43,7 @@ Please reference the Bootstrap documentation for best practices.
           </div>
           <div class="col-xs-4 text-right">
             {{ account.logo }}
-          </div> 
+          </div>
 		  <div class="col-xs-4 text-center">
 	            {{ account.account_details.billing_address }}
 	            <br>
@@ -53,7 +53,7 @@ Please reference the Bootstrap documentation for best practices.
 	          {% if account.account_details.billing_phone_number %}
 	            <div>{{ account.account_details.billing_phone_number }}</div>
 	          {% endif %}
-			</div>   
+			</div>
           <div class="col-xs-8">
 			  {% if job.employees.first %}
           <strong>
@@ -69,72 +69,18 @@ Please reference the Bootstrap documentation for best practices.
       <div class="row" id="document-info">
         <div class="col-xs-3">
           <address>
-			  
-             
-            <div><strong><u>Service Address</u></strong></div>
-            
-			  
             <strong>{{ customer.name }}</strong>
             <br>
             {{ customer.service_address }}
             <br>
             {{ customer.service_city }}, {{ customer.service_state }} {{ customer.service_zip_code }}
-            
+            <br>
+            {{ customer.service_country }}
           </address>
-		  
-		  <div></div>
-		  <br>
-
-       
-
-          {% if customer.phone_number %}
-            <div>{{ customer.phone_number }}</div>
-          {% endif %}
-
-          {% if customer.alt_phone_number %}
-            <div>{{ customer.alt_phone_number }}</div>
-          {% endif %}
-
-          {% if customer.primary_contact && customer.primary_contact.name != customer.name %}
-            <div id="primary_contact_details">
-              <strong>Primary Contact:</strong>
-              <div>{{ customer.primary_contact.name }}</div>
-              <div>{{ customer.primary_contact.phone1 }}</div>
-            </div>
-          {% endif %}
-        </div><!-- .col-xs-3 -->
-
-        <div class="col-xs-4">
-          <address>
-			  
-			<div><strong><u>Billing Address</u></strong></div>  
-			  
-             {% if customer.parent %}
-             	{% assign my_cust = customer.parent %}
-             	{% else %}
-             	{% assign my_cust = customer %}
-             {% endif %}
-
-             {% if customer.parent %}
-             <strong>{{ customer.parent.name }}</strong>
-             	{% else %}
-             <strong>{{ customer.name }}</stong>
-             {% endif %}
-		   
-            <br>
-            {{ customer.billing_address }}
-            <br>
-            {{ customer.billing_city }},
-            {{ customer.billing_state }}
-            {{ customer.billing_zip_code }}
-            <br>
-            {{ customer.billing_country }}
-         
 
           {% if customer.email_address %}
             <div>{{ customer.email_address }}</div>
           {% endif %}
-		   </address>
 
           {% if customer.phone_number %}
             <div>{{ customer.phone_number }}</div>
@@ -153,7 +99,33 @@ Please reference the Bootstrap documentation for best practices.
           {% endif %}
         </div><!-- .col-xs-3 -->
 
-       
+        <div class="col-xs-3">
+          <address>
+            <strong>{{ customer.billing_name }}</strong>
+            <br>
+            {{ customer.billing_address }}
+            <br>
+            {{ customer.billing_city }}, {{ customer.billing_state }} {{ customer.billing_zip_code }}
+            <br>
+            {{ customer.billing_country }}
+          </address>
+
+          {% if customer.email_address %}
+            <div>{{ customer.billing_email_address }}</div>
+          {% endif %}
+
+          {% if customer.phone_number %}
+            <div>{{ customer.billing_phone_number }}</div>
+          {% endif %}
+
+          {% if customer.billing_primary_contact %}
+            <div id="primary_contact_details">
+              <strong>Primary Contact:</strong>
+              <div>{{ customer.billing_primary_contact.name }}</div>
+              <div>{{ customer.billing_primary_contact.phone1 }}</div>
+            </div>
+          {% endif %}
+        </div><!-- .col-xs-3 -->
 
         <div class="col-xs-3">
           <table class="table">
@@ -204,14 +176,14 @@ Please reference the Bootstrap documentation for best practices.
           </table>
         </div><!-- .col-xs-3 -->
       </div><!-- .row -->
-	  
+
 	  <h2>Additional Notes</h2>
       {% for notes in job.notes %}
         <div class="setting">
           {{ notes.note | h }}
         </div>
       {% endfor %}
-	  
+
 	  <h2>Additional Information</h2>
 	  <table class="table" id="schedule-table">
 	    <tr>
@@ -331,7 +303,7 @@ Please reference the Bootstrap documentation for best practices.
           {% endfor %}
         </tbody>
       </table>
-	  
+
       {% if account.account_details.work_order_footer != empty %}
         <pre>{{ account.account_details.work_order_footer }}</pre>
       {% endif %}

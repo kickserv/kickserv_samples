@@ -92,12 +92,12 @@
 
       <div id="billing-address">
         <address>
-          {% if customer.primary_contact && customer.primary_contact.name != customer.name %}
-            <strong>{{ customer.primary_contact.name }}</strong>
+          {% if customer.billing_primary_contact && customer.billing_primary_contact.name != customer.billing_name %}
+            <strong>{{ customer.billing_primary_contact.name }}</strong>
             <br>
-            {{ customer.name }}
+            {{ customer.billing_name }}
           {% else %}
-            <strong>{{ customer.name }}</strong>
+            <strong>{{ customer.billing_name }}</strong>
           {% endif %}
           <br>
           {{ customer.billing_address }}
