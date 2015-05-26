@@ -94,11 +94,11 @@ Please reference the Bootstrap documentation for best practices.
             {{ customer.billing_country }}
           </address>
 
-          {% if customer.email_address %}
+          {% if customer.billing_email_address %}
             <div>{{ customer.billing_email_address }}</div>
           {% endif %}
 
-          {% if customer.phone_number %}
+          {% if customer.billing_phone_number %}
             <div>{{ customer.billing_phone_number }}</div>
           {% endif %}
 
