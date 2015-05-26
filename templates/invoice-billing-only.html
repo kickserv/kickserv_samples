@@ -49,7 +49,7 @@ Please reference the Bootstrap documentation for best practices.
       <div class="row" id="document-info">
         <div class="col-xs-4">
           <address>
-            <strong>{{ customer.name }}</strong>
+            <strong>{{ customer.billing_name }}</strong>
             <br>
             {{ customer.billing_address }}
             <br>
@@ -58,23 +58,19 @@ Please reference the Bootstrap documentation for best practices.
             {{ customer.billing_country }}
           </address>
 
-          {% if customer.email_address %}
-            <div>{{ customer.email_address }}</div>
+          {% if customer.billing_email_address %}
+            <div>{{ customer.billing_email_address }}</div>
           {% endif %}
 
-          {% if customer.phone_number %}
-            <div>{{ customer.phone_number }}</div>
+          {% if customer.billing_phone_number %}
+            <div>{{ customer.billing_phone_number }}</div>
           {% endif %}
 
-          {% if customer.alt_phone_number %}
-            <div>{{ customer.alt_phone_number }}</div>
-          {% endif %}
-
-          {% if customer.primary_contact && customer.primary_contact.name != customer.name %}
+          {% if customer.billing_primary_contact %}
             <div id="primary_contact_details">
               <strong>Primary Contact:</strong>
-              <div>{{ customer.primary_contact.name }}</div>
-              <div>{{ customer.primary_contact.phone1 }}</div>
+              <div>{{ customer.billing_primary_contact.name }}</div>
+              <div>{{ customer.billing_primary_contact.phone1 }}</div>
             </div>
           {% endif %}
         </div><!-- .col-xs-4 -->
