@@ -111,8 +111,8 @@ Please reference the Bootstrap documentation for best practices.
                   <strong>Date</strong>
                 </td>
                 <td class="text-right">
-                  {% if job.scheduled_on %}
-                    {{ job.scheduled_on | date: "%m/%d/%y" }}
+                  {% if job.estimate_date %}
+                    {{ job.estimate_date | date: "%D" }}
                   {% endif %}
                 </td>
               </tr>
